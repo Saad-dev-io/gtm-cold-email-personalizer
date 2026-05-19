@@ -56,32 +56,59 @@ with:                        │ 2. Few-Shot      │        (Saved File)
 
 ---
 
+## 🖥️ Two Ways to Use
+
+### Option 1: Web UI (Recommended)
+
+A premium dark-mode web interface — perfect for demos and non-technical users.
+
+```bash
+# Start the web server
+python app.py
+
+# Open in your browser
+http://localhost:5000
+```
+
+**Features:**
+- 🎨 Premium dark-mode UI with glassmorphism design
+- 📝 Simple form to enter prospect details
+- ✨ One-click email generation with AI
+- 📋 Copy-to-clipboard with visual feedback
+- 📜 Session history to track all generated emails
+- 🔄 "Load Sample" button for instant demos
+
+### Option 2: CLI Mode
+
+Process all prospects from `prospects.json` in your terminal.
+
+```bash
+python email_generator.py
+```
+
+---
+
 ## 📋 Sample Output
 
 ```
-╔══════════════════════════════════════════════════════════╗
-║  🚀  GTM COLD EMAIL PERSONALIZER                        ║
-║  Powered by Few-Shot Prompting + Google Gemini           ║
-╚══════════════════════════════════════════════════════════╝
-
-  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  ==========================================================
   PROSPECT 1/4: Sarah Chen
   VP of Engineering @ NovaTech Solutions
-  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  ==========================================================
 
-  📌 Achievement: Led the launch of an AI-powered customer
+  [Achievement] Led the launch of an AI-powered customer
      support platform that reduced ticket resolution time by 40%
 
-  ✉️  Subject: Your AI support platform × autonomous agents
+  [Subject] Your AI support platform × autonomous agents
 
-  📝 Email:
+  [Email]
      "That 40% reduction in ticket resolution is the real
       deal, Sarah — most teams talk AI, your team shipped it.
       At Synapse, we're building agents that could plug into
       NovaTech's platform to handle L1 tickets end-to-end.
       Worth a 15-min chat next week?"
 
-  📊 Word Count: 47/50
+  [Word Count] 47/50
 ```
 
 ---
@@ -106,12 +133,17 @@ pip install -r requirements.txt
 # Create a .env file with:
 OPENROUTER_API_KEY=your_api_key_here
 
-# 4. Run the script
+# 4a. Run the Web UI
+python app.py
+# Then open http://localhost:5000
+
+# 4b. Or run the CLI version
 python email_generator.py
 ```
 
 ### Output
-- **Terminal**: Beautifully formatted, color-coded results
+- **Web UI**: Beautiful dark-mode interface at `http://localhost:5000`
+- **Terminal**: Color-coded results in the console
 - **File**: `generated_outreach.txt` with all generated emails
 
 ---
@@ -121,6 +153,7 @@ python email_generator.py
 | Technology | Purpose |
 |-----------|---------|
 | **Python 3.10+** | Core language |
+| **Flask** | Web server for the UI |
 | **OpenRouter API** | Gateway for Gemini LLM generation |
 | **Few-Shot Prompting** | Prompt engineering technique |
 | **colorama** | Terminal color formatting |
@@ -132,13 +165,19 @@ python email_generator.py
 ## 📁 Project Structure
 
 ```
-├── prospects.json           # Mock LinkedIn profile data (input)
-├── email_generator.py       # Main script — core logic
-├── generated_outreach.txt   # Generated emails (output)
-├── requirements.txt         # Python dependencies
-├── .env                     # API key (gitignored)
-├── .gitignore               # Ignore secrets & generated files
-└── README.md                # This file
+├── app.py                    # Flask web server (Web UI mode)
+├── email_generator.py        # Core logic + CLI mode
+├── templates/
+│   └── index.html            # Web UI page
+├── static/
+│   ├── style.css             # Premium dark-mode styles
+│   └── script.js             # Frontend logic
+├── prospects.json            # Mock LinkedIn profile data (input)
+├── generated_outreach.txt    # Generated emails (output, gitignored)
+├── requirements.txt          # Python dependencies
+├── .env                      # API key (gitignored)
+├── .gitignore                # Ignore secrets & generated files
+└── README.md                 # This file
 ```
 
 ---
