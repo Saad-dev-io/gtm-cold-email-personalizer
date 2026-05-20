@@ -92,6 +92,5 @@ Results will display in the console and automatically save to `generated_outreac
 │   └── script.js           # Fetch API & clipboard integration
 └── templates/
     └── index.html          # Web dashboard layout
-<<<<<<< HEAD
 ```
 
