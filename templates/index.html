@@ -3,148 +3,148 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Generate highly personalized cold email openers using AI-powered few-shot prompting.">
-    <title>GTM Cold Email Personalizer — AI-Powered Outreach</title>
+    <meta name="description" content="Generate personalized cold email openers using few-shot prompting and Gemini AI.">
+    <title>Cold Email Personalizer</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
-    <div class="bg-particles" aria-hidden="true">
-        <div class="particle"></div><div class="particle"></div><div class="particle"></div>
-        <div class="particle"></div><div class="particle"></div><div class="particle"></div>
+    <div class="app-shell">
+        <header class="topbar" id="app-header">
+            <div class="topbar-inner">
+                <div class="topbar-left">
+                    <svg class="brand-mark" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                        <polyline points="22,6 12,13 2,6"/>
+                    </svg>
+                    <div>
+                        <h1 class="topbar-title">Cold Email Personalizer</h1>
+                        <p class="topbar-caption">Few-shot prompting &middot; Gemini 2.5</p>
+                    </div>
+                </div>
+                <a href="https://github.com" target="_blank" rel="noopener" class="topbar-link">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+                </a>
+            </div>
+        </header>
+
+        <main class="workspace" id="main-content">
+            <div class="workspace-grid">
+
+                <!-- Left: Input Form -->
+                <section class="card" id="input-panel">
+                    <div class="card-head">
+                        <h2 class="card-title">Prospect Details</h2>
+                    </div>
+                    <form id="prospect-form" autocomplete="off">
+                        <div class="field-row">
+                            <div class="field">
+                                <label for="input-name">Full Name</label>
+                                <input type="text" id="input-name" name="name" placeholder="" required>
+                            </div>
+                            <div class="field">
+                                <label for="input-role">Role</label>
+                                <input type="text" id="input-role" name="role" placeholder="" required>
+                            </div>
+                        </div>
+                        <div class="field-row">
+                            <div class="field">
+                                <label for="input-company">Company</label>
+                                <input type="text" id="input-company" name="company" placeholder="" required>
+                            </div>
+                            <div class="field">
+                                <label for="input-industry">Industry</label>
+                                <input type="text" id="input-industry" name="company_industry" placeholder="" required>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <label for="input-achievement">Recent Achievement</label>
+                            <textarea id="input-achievement" name="recent_achievement" rows="3" placeholder="" required></textarea>
+                        </div>
+                        <div class="field">
+                            <label for="input-headline">LinkedIn Headline</label>
+                            <input type="text" id="input-headline" name="linkedin_headline" placeholder="" required>
+                        </div>
+                        <button type="submit" class="btn-primary" id="btn-generate">
+                            <span class="btn-label">Generate Email</span>
+                            <svg class="btn-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                        </button>
+                    </form>
+                </section>
+
+                <!-- Right: Output -->
+                <section class="card output-card" id="output-panel">
+                    <!-- Empty -->
+                    <div class="state-empty" id="empty-state">
+                        <div class="state-empty-icon">
+                            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                                <polyline points="22,6 12,13 2,6"/>
+                            </svg>
+                        </div>
+                        <h3>No email generated yet</h3>
+                        <p>Fill in the prospect details and hit <strong>Generate Email</strong> to create a personalized cold email opener.</p>
+                    </div>
+
+                    <!-- Loading -->
+                    <div class="state-loading hidden" id="loading-state">
+                        <div class="loader"><span></span><span></span><span></span></div>
+                        <p class="state-loading-text">Generating<span class="dots"></span></p>
+                    </div>
+
+                    <!-- Result -->
+                    <div class="state-result hidden" id="result-state">
+                        <div class="card-head">
+                            <h2 class="card-title">Generated Email</h2>
+                            <div class="result-wc" id="result-meta"></div>
+                        </div>
+                        <div class="result-block" id="result-card">
+                            <div class="result-field">
+                                <span class="result-label">Subject</span>
+                                <p class="result-subject" id="result-subject"></p>
+                            </div>
+                            <hr class="divider">
+                            <div class="result-field">
+                                <span class="result-label">Email Body</span>
+                                <blockquote class="result-body" id="result-body"></blockquote>
+                            </div>
+                            <div class="result-actions">
+                                <span class="wc-pill" id="word-count-badge">
+                                    <span id="word-count-value"></span><span class="wc-of">/50 words</span>
+                                </span>
+                                <button class="btn-secondary" id="btn-copy" type="button">
+                                    <svg class="icon-copy" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                                    <svg class="icon-check hidden" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                                    <span class="copy-label">Copy</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Error -->
+                    <div class="state-error hidden" id="error-state">
+                        <p class="error-title">Something went wrong</p>
+                        <p class="error-detail" id="error-message"></p>
+                        <button class="btn-secondary" id="btn-retry" type="button">Try again</button>
+                    </div>
+                </section>
+            </div>
+
+            <!-- History -->
+            <section class="history hidden" id="history-section">
+                <div class="card-head">
+                    <h2 class="card-title">History</h2>
+                    <span class="history-badge" id="history-count">0</span>
+                </div>
+                <div class="history-list" id="history-grid"></div>
+            </section>
+        </main>
     </div>
 
-    <header class="app-header" id="app-header">
-        <div class="header-content">
-            <div class="logo-group">
-                <span class="logo-icon">🚀</span>
-                <div>
-                    <h1 class="app-title">GTM Cold Email Personalizer</h1>
-                    <p class="app-subtitle">Powered by Few-Shot Prompting + Google Gemini AI</p>
-                </div>
-            </div>
-            <div class="header-badges">
-                <span class="badge badge-ai">AI-Powered</span>
-                <span class="badge badge-model">Gemini 2.5 Flash</span>
-            </div>
-        </div>
-    </header>
-
-    <main class="main-content" id="main-content">
-        <div class="panels-container">
-            <section class="panel input-panel" id="input-panel">
-                <div class="panel-header">
-                    <h2 class="panel-title"><span class="panel-icon">👤</span> Prospect Details</h2>
-                    <button class="btn-sample" id="btn-load-sample" title="Auto-fill with sample data">
-                        <span>Load Sample</span>
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"/></svg>
-                    </button>
-                </div>
-                <form id="prospect-form" autocomplete="off">
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="input-name">Full Name</label>
-                            <input type="text" id="input-name" name="name" placeholder="e.g. Sarah Chen" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="input-role">Role / Title</label>
-                            <input type="text" id="input-role" name="role" placeholder="e.g. VP of Engineering" required>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="input-company">Company</label>
-                            <input type="text" id="input-company" name="company" placeholder="e.g. NovaTech Solutions" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="input-industry">Industry</label>
-                            <input type="text" id="input-industry" name="company_industry" placeholder="e.g. Enterprise SaaS" required>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="input-achievement">Recent Achievement</label>
-                        <textarea id="input-achievement" name="recent_achievement" rows="3" placeholder="e.g. Led the launch of an AI-powered customer support platform that reduced ticket resolution time by 40%" required></textarea>
-                    </div>
-                    <div class="form-group">
-                        <label for="input-headline">LinkedIn Headline</label>
-                        <input type="text" id="input-headline" name="linkedin_headline" placeholder="e.g. Building intelligent systems that scale" required>
-                    </div>
-                    <button type="submit" class="btn-generate" id="btn-generate">
-                        <span class="btn-text">Generate Email</span>
-                        <span class="btn-icon">✨</span>
-                        <div class="btn-shimmer"></div>
-                    </button>
-                </form>
-            </section>
-
-            <section class="panel output-panel" id="output-panel">
-                <div class="empty-state" id="empty-state">
-                    <div class="empty-icon">✉️</div>
-                    <h3>Your AI-Generated Email Will Appear Here</h3>
-                    <p>Fill in the prospect details and click <strong>Generate Email</strong> to create a personalized cold email opener.</p>
-                    <div class="empty-features">
-                        <div class="feature-tag">🎯 Personalized</div>
-                        <div class="feature-tag">⚡ Under 50 Words</div>
-                        <div class="feature-tag">🧠 Few-Shot AI</div>
-                    </div>
-                </div>
-                <div class="loading-state hidden" id="loading-state">
-                    <div class="spinner"><div class="spinner-ring"></div><div class="spinner-ring"></div><div class="spinner-ring"></div></div>
-                    <p class="loading-text">Generating your personalized email<span class="loading-dots"></span></p>
-                    <p class="loading-sub">Using few-shot prompting with Gemini AI</p>
-                </div>
-                <div class="result-state hidden" id="result-state">
-                    <div class="panel-header">
-                        <h2 class="panel-title"><span class="panel-icon">✉️</span> Generated Email</h2>
-                        <div class="result-meta" id="result-meta"></div>
-                    </div>
-                    <div class="result-card" id="result-card">
-                        <div class="result-section">
-                            <label class="result-label">Subject Line</label>
-                            <div class="result-subject" id="result-subject"></div>
-                        </div>
-                        <div class="result-divider"></div>
-                        <div class="result-section">
-                            <label class="result-label">Email Opening (3 Sentences)</label>
-                            <div class="result-body" id="result-body"></div>
-                        </div>
-                        <div class="result-footer">
-                            <div class="word-count-badge" id="word-count-badge">
-                                <span class="wc-label">Words:</span>
-                                <span class="wc-value" id="word-count-value"></span>
-                                <span class="wc-limit">/50</span>
-                            </div>
-                            <button class="btn-copy" id="btn-copy" title="Copy email to clipboard">
-                                <svg class="copy-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-                                <svg class="check-icon hidden" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-                                <span class="copy-text">Copy</span>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                <div class="error-state hidden" id="error-state">
-                    <div class="error-icon">⚠️</div>
-                    <h3>Something Went Wrong</h3>
-                    <p class="error-message" id="error-message"></p>
-                    <button class="btn-retry" id="btn-retry">Try Again</button>
-                </div>
-            </section>
-        </div>
-
-        <section class="history-section hidden" id="history-section">
-            <div class="history-header">
-                <h2 class="history-title"><span>📋</span> Session History</h2>
-                <span class="history-count" id="history-count">0 emails</span>
-            </div>
-            <div class="history-grid" id="history-grid"></div>
-        </section>
-    </main>
-
-    <div class="toast hidden" id="toast">
-        <span class="toast-icon">✓</span>
-        <span class="toast-text" id="toast-text">Copied to clipboard!</span>
+    <div class="snackbar hidden" id="toast">
+        <span class="snackbar-text" id="toast-text">Copied to clipboard</span>
     </div>
 
     <script src="/static/script.js"></script>

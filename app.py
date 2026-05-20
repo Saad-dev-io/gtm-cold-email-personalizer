@@ -135,19 +135,6 @@ def generate():
     except Exception as e:
         return jsonify({"error": f"Server error: {str(e)}"}), 500
 
-
-@app.route("/samples", methods=["GET"])
-def samples():
-    """Return the sample prospects from prospects.json for the 'Load Sample' feature."""
-    try:
-        filepath = os.path.join(os.path.dirname(__file__), "prospects.json")
-        with open(filepath, "r", encoding="utf-8") as f:
-            data = json.load(f)
-        return jsonify(data)
-    except Exception as e:
-        return jsonify({"error": str(e)}), 500
-
-
 # ─────────────────────────────────────────────────────────────
 # ENTRY POINT
 # ─────────────────────────────────────────────────────────────

@@ -8,8 +8,7 @@ Built to demonstrate the core GTM Agent capability:
 "Generate the first 3 sentences of a cold email that reference
 specific, verifiable facts about the prospect."
 
-Author: Your Name
-Tech: Python, Google Gemini API (google-genai), Few-Shot Prompting
+Tech: Python, OpenRouter API (Gemini), Few-Shot Prompting
 """
 
 import json
