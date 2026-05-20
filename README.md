@@ -15,6 +15,12 @@ This project was built to demonstrate advanced prompt engineering and production
 
 ---
 
+## Demo
+
+https://github.com/Saad-dev-io/gtm-cold-email-personalizer/raw/main/demo.mp4
+
+---
+
 ## Quick Start
 
 ### Prerequisites
@@ -86,4 +92,8 @@ Results will display in the console and automatically save to `generated_outreac
 │   └── script.js           # Fetch API & clipboard integration
 └── templates/
     └── index.html          # Web dashboard layout
+<<<<<<< HEAD
 ```
+=======
+```
+>>>>>>> 870085546cc8ea744b260bbeed1d20636cc74c4c
